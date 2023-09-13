@@ -1,3 +1,5 @@
+//Vitor Castro Dias
+
 #include <iostream>
 using namespace std;
 
@@ -116,6 +118,7 @@ void inserirElemento()
 {
 	// aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
+
 	if (novo == NULL)
 	{
 		return;
@@ -124,6 +127,19 @@ void inserirElemento()
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
+
+	NO* aux = primeiro;
+
+	while (aux != NULL) 
+	{
+		if (aux->valor == novo->valor) 
+		{
+			cout << "Digite novamento, valor repitido:";
+			cin >> novo->valor;
+			continue;
+		}
+		aux = aux->prox;
+	}
 
 	if (primeiro == NULL)
 	{
