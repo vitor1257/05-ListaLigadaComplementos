@@ -128,32 +128,57 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	NO* aux = primeiro;
-
-	while (aux != NULL) 
-	{
-		if (aux->valor == novo->valor) 
-		{
-			cout << "Digite novamento, valor repitido:";
-			cin >> novo->valor;
-			continue;
-		}
-		aux = aux->prox;
-	}
-
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
 	}
-	else
+	else if(novo->valor < primeiro->valor) /*Vai analisar se o segundo termo digitado é menor que o primeiro*/
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		NO* primeiro = NULL;
+
+		novo->valor = primeiro;
+		primeiro = novo;
+	
+	}else
+	{
+		NO* Tanterior = primeiro;
+		NO* Tatual = primeiro-> prox;
+
+		while (Tatual != NULL && Tatual->valor < novo->prox)
+		{
+			Tanterior = Tatual;
+			Tatual = Tatual->prox;
 		}
-		aux->prox = novo;
+		if(Tatual != NULL && Tatual->valor == novo-> valor) /* If que analisa se ocorreu a duplicaçao do termo*/
+		{
+			cout << "Valor duplicado, digite novamente:";
+			free(novo);
+			return;
+		}
+		Tanterior->prox = Tatual;
+		novo->prox = Tatual;
+
 	}
+	//{
+	//	// procura o final da lista
+	//	NO* aux = primeiro;
+
+	//	/*while (aux != NULL)
+	//	{
+	//		if (aux->valor == novo->valor)
+	//		{
+	//			cout << "Valor duplicado, digite novamente:";
+	//			cin >> novo->valor;
+	//			break;
+	//		}
+	//		aux = aux->prox;
+	//	}*/
+
+	//	while (aux->prox != NULL) {
+	//		aux = aux->prox;
+	//	}
+	//	aux->prox = novo;
+	//}
 }
 
 void excluirElemento()
