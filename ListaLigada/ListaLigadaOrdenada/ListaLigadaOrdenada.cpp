@@ -124,68 +124,90 @@ void inserirElemento()
 		return;
 	}
 
+	/*while(aux->prox != NULL) { tentativa falha D:(maios ou menos)
+
+		if (aux->valor == novo->valor)
+		{
+			cout << "Valor duplicado\n";
+			return;
+		}
+		aux = aux->prox;
+	}
+	aux->prox = novo;*/
+
+
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL) /*Analisa o primeiro termo*/
+	if (primeiro == NULL)
 	{
 		primeiro = novo;
 	}
 	else
 	{
-		//procura o final da lista
+		
 		NO* aux = primeiro;
+		NO * Tanterior = NULL;
 
-		while (aux->prox != NULL) {
-
-			if (aux->valor == novo->valor)
-			{
-				cout << "Valor duplicado\n";
-				break;
-			}
+		while (aux != NULL && aux->valor < novo->valor)
+		{
+			Tanterior = aux;
 			aux = aux->prox;
 		}
-		aux->prox = novo;
-	}
-	
-
-
-	/* if(novo->valor < primeiro->valor) 
-		NO* primeiro = NULL;
-
-		novo->valor = primeiro;
-		primeiro = novo;
-	
-	}else
-	{
-		NO* Tanterior = primeiro;
-		NO* Tatual = primeiro-> prox;
-
-		while(Tatual->valor < novo->prox)
+		
+		if (aux != NULL && aux->valor == novo->valor)
 		{
-			Tanterior = Tatual;
-			Tatual = Tatual->prox;
-		}
-		if(Tatual != NULL && Tatual->valor == novo-> valor)		
-		{
-			cout << "Valor duplicado, digite novamente:";
+			cout << "Valor duplicado\n";
 			free(novo);
 			return;
+		}	
+		
+		if (Tanterior == NULL)
+		{
+			novo->prox = primeiro;
+			primeiro = novo;
+		}else
+		{
+			Tanterior->prox = novo;
+			novo->prox = aux;
 		}
-		Tanterior->prox = Tatual;
-		novo->prox = Tatual;
-
-	}*/
+	}
 }
 
 void excluirElemento()
 {
+	NO* aux = primeiro;
+
 
 }
 
 void buscarElemento()
 {
+	NO* aux = primeiro;
+	bool s;
+	int num;
+
+	cout << "Digite o numero que voce deseja buscar:";
+	cin >> num;
+
+	while(aux != NULL)
+	{
+		if(aux->valor == num)
+		{
+			s = true;
+			cout << "Valor encontrado\n";
+			return;
+
+		}else if (aux->valor > num)
+		{
+			s = false;
+			cout << "Valor nao encontrado\n";
+			aux = aux->prox;
+			return;
+		}
+		s = false;
+	}
 
 }
 
