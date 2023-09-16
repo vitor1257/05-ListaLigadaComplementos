@@ -125,18 +125,6 @@ void inserirElemento()
 		return;
 	}
 
-	/*while(aux->prox != NULL) { tentativa falha D:(maios ou menos)
-
-		if (aux->valor == novo->valor)
-		{
-			cout << "Valor duplicado\n";
-			return;
-		}
-		aux = aux->prox;
-	}
-	aux->prox = novo;*/
-
-
 	cout << "Digite o elemento: ";
 	cin >> novo->valor;
 	novo->prox = NULL;
@@ -145,34 +133,21 @@ void inserirElemento()
 	{
 		primeiro = novo;
 	}
-	else
-	{
-		
+	else {
+		cout << "Elementos: \n";
 		NO* aux = primeiro;
-		NO * Tanterior = NULL;
 
-		while (aux != NULL && aux->valor < novo->valor)
+		while (aux->prox != NULL)
 		{
-			Tanterior = aux;
-			aux = aux->prox;
-		}
+			if (aux->valor == novo->valor)
+			{
+				cout << "Valor duplicado\n";
+				return;
+			}
+			aux->prox = novo;
+		} 
+		/*Nao consegui fazer a parte de ordenar os numero*/
 		
-		if (aux != NULL && aux->valor == novo->valor)
-		{
-			cout << "Valor duplicado\n";
-			free(novo);
-			return;
-		}	
-		
-		if (Tanterior == NULL)
-		{
-			novo->prox = primeiro;
-			primeiro = novo;
-		}else
-		{
-			Tanterior->prox = novo;
-			novo->prox = aux;
-		}
 	}
 }
 
