@@ -1,5 +1,6 @@
 //Vitor Castro Dias
 
+
 #include <iostream>
 using namespace std;
 
@@ -177,9 +178,35 @@ void inserirElemento()
 
 void excluirElemento()
 {
-	NO* aux = primeiro;
+	NO* aux = NULL;
+	NO* delet = primeiro;
+	int exclu;
 
+	cout << "Digite o numero que você deseja excluir:";
+	cin >> exclu;
 
+	while (delet != NULL) 
+	{
+		if (delet->valor == exclu)
+		{
+			if (aux == NULL)
+			{
+				primeiro = delet->prox;
+			}else
+			{
+				aux->prox = delet->prox;
+				free(delet);
+				cout << "valor deletado\n";
+				return;
+			}
+		}else if (delet->valor > exclu)
+		{
+			return;
+		}
+		aux = delet;
+		delet = delet->prox;
+	}
+	cout << "Valor nao encontrado\n";
 }
 
 void buscarElemento()
@@ -203,12 +230,10 @@ void buscarElemento()
 		{
 			s = false;
 			cout << "Valor nao encontrado\n";
-			aux = aux->prox;
 			return;
 		}
-		s = false;
+		aux = aux->prox;
 	}
-
 }
 
 
