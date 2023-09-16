@@ -192,16 +192,14 @@ void excluirElemento()
 			if (aux == NULL)
 			{
 				primeiro = delet->prox;
-			}else
+			}
+			else
 			{
 				aux->prox = delet->prox;
 				free(delet);
 				cout << "valor deletado\n";
 				return;
 			}
-		}else if (delet->valor > exclu)
-		{
-			return;
 		}
 		aux = delet;
 		delet = delet->prox;
