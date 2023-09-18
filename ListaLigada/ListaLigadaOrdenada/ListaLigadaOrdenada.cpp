@@ -117,7 +117,7 @@ void exibirElementos()
 
 void inserirElemento()
 {
-	// aloca memoria dinamicamente para o novo elemento
+	// Aloca memoria dinamicamente para o novo elemento
 	NO* novo = (NO*)malloc(sizeof(NO));
 
 	if (novo == NULL)
@@ -129,26 +129,33 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
-	if (primeiro == NULL)
-	{
-		primeiro = novo;
-	}
-	else {
-		cout << "Elementos: \n";
-		NO* aux = primeiro;
+	NO* atual = primeiro;
+	NO* anterior = NULL;
 
-		while (aux->prox != NULL)
-		{
-			if (aux->valor == novo->valor)
-			{
-				cout << "Valor duplicado\n";
-				return;
-			}
-			aux->prox = novo;
-		} 
-		/*Nao consegui fazer a parte de ordenar os numero*/
-		
+	if (primeiro == NULL || novo->valor < primeiro->valor)
+	{
+		novo->prox = primeiro;
+		primeiro = novo;
+		return;
 	}
+
+	while (atual != NULL && atual->valor < novo->valor)
+	{
+		anterior = atual;
+		atual = atual->prox;
+	}
+
+	if (atual != NULL && atual->valor == novo->valor)
+	{
+		cout << "Valor duplicado\n";
+		free(novo);
+	}
+	else
+	{
+		novo->prox = atual;
+		anterior->prox = novo;
+	}
+
 }
 
 void excluirElemento()
